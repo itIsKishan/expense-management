@@ -37,6 +37,17 @@ categoriesController.list = (req,res) =>{
     })
 }
 
+categoriesController.show = (req,res) =>{
+    const id = req.params.id
+    Category.findOne({ _id : id, userId : req.user._id})
+    .then((cat) =>{
+        res.json(cat)
+    })
+    .catch((err) =>{
+        res.json(err)
+    })
+}
+
 categoriesController.delete = (req,res) =>{
     const id = req.params.id
     Category.findOneAndDelete({_id : id, userId : req.user._id})

@@ -24,6 +24,16 @@ budgetController.list = (req,res) =>{
     })
 }
 
+budgetController.show = (req,res) =>{
+    const id = req.params.id
+    Budget.findOne({ _id : id, userId : req.user._id})
+    .then((bud) =>{
+        res.json(bud)
+    })
+    .catch((err) =>{
+        res.json(err)
+    })
+}
 budgetController.update = (req,res) =>{
     const id = req.params.id
     const data = req.body

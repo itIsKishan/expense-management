@@ -14,7 +14,7 @@ expenseController.add = (req,res) =>{
     })
 }
 
-expenseController.showAll = (req,res) =>{
+expenseController.list = (req,res) =>{
    Expense.find({ userId : req.user._id })
    .then((expenses) =>{
        res.json(expenses)
@@ -24,6 +24,16 @@ expenseController.showAll = (req,res) =>{
    })
 }
 
+expenseController.show = (req,res) =>{
+    const id = req.params.id
+    Expense.findOne({ _id : id, userId : req.user._id})
+    .then((exp) =>{
+        res.json(exp)
+    })
+    .catch((err) =>{
+        res.json(err)
+    })
+}
 
 expenseController.delete = (req,res) =>{
     const id = req.params.id
